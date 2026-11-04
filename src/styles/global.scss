@@ -1,0 +1,57 @@
+@use './variables';
+
+@font-face {
+  font-family: 'Athene';
+  src: url('../assets/fonts/Athene.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+
+  &__content {
+    margin-left: 250px;
+    padding: 65px 55px;
+
+    span {
+      color: var(--color-text-muted);
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      margin-top: 25px;
+      color: var(--color-white);
+      font-family: Georgia, serif;
+      font-size: 42px;
+      font-weight: 400;
+    }
+
+    p {
+      margin-top: 12px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .app__content {
+    margin-left: 0;
+    padding: 35px 24px;
+  }
+}
