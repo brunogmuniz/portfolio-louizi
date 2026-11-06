@@ -1,0 +1,362 @@
+.about {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 72px clamp(28px, 6vw, 90px) 100px;
+  color: var(--color-white);
+
+  &__eyebrow {
+    display: block;
+    color: var(--color-wine);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    line-height: 1.5;
+  }
+
+  &__photo--face img {
+    object-position: center 20%;
+  }
+
+  &__header {
+    position: relative;
+    padding-bottom: 75px;
+
+    h1 {
+      margin: 28px 0 35px;
+      font-family: 'Athene', Georgia, serif;
+      font-size: clamp(58px, 8vw, 112px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: -4px;
+
+      span {
+        color: var(--color-text-muted);
+      }
+    }
+  }
+
+  &__intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 850px;
+    margin-left: auto;
+
+    p {
+      max-width: 420px;
+      margin: 0;
+      color: var(--color-text-muted);
+      font-family: Georgia, serif;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.6;
+    }
+
+    span {
+      padding-bottom: 5px;
+      color: var(--color-text-muted);
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-align: right;
+    }
+  }
+
+  &__gallery {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-rows: 65px;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  &__photo {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #242220;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition:
+              transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+              filter 0.6s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.035);
+      filter: grayscale(0%);
+    }
+
+    figcaption {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      color: white;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 1px 8px rgb(0 0 0 / 45%);
+    }
+
+    &--main {
+      grid-column: 1 / 8;
+      grid-row: span 7;
+    }
+
+    &--small {
+      grid-column: 8 / 13;
+      grid-row: span 4;
+    }
+
+    &--tall {
+      grid-column: 8 / 13;
+      grid-row: span 5;
+    }
+
+    &--wide {
+      grid-column: 1 / 6;
+      grid-row: span 5;
+    }
+
+    &--medium {
+      grid-column: 6 / 13;
+      grid-row: span 5;
+    }
+
+    &--portrait {
+      grid-column: 1 / 5;
+      grid-row: span 6;
+    }
+
+    &--detail {
+      grid-column: 5 / 9;
+      grid-row: span 6;
+    }
+
+    &--last {
+      grid-column: 9 / 13;
+      grid-row: span 6;
+    }
+  }
+
+  &__story {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 12%;
+    padding: 150px 5% 130px;
+  }
+
+  &__story-heading {
+    h2 {
+      max-width: 350px;
+      margin: 25px 0 0;
+      font-family: 'Athene', Georgia, serif;
+      font-size: clamp(38px, 4.5vw, 58px);
+      font-weight: 400;
+      line-height: 1.12;
+    }
+  }
+
+  &__story-content {
+    p {
+      margin: 0 0 25px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__quote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 90px 10%;
+    border-top: 1px solid rgb(245 241 235 / 12%);
+    border-bottom: 1px solid rgb(245 241 235 / 12%);
+    text-align: center;
+
+    p {
+      max-width: 780px;
+      margin: 30px 0 0;
+      font-family: 'Athene', Georgia, serif;
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1.2;
+    }
+  }
+
+  &__closing {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 35px 12%;
+    align-items: end;
+    padding: 130px 5% 30px;
+
+    h2 {
+      margin: 25px 0 0;
+      font-family: 'Athene', Georgia, serif;
+      font-size: clamp(38px, 5vw, 65px);
+      font-weight: 400;
+      line-height: 1.08;
+
+      span {
+        color: var(--color-text-muted);
+      }
+    }
+
+    > p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+  }
+
+  &__contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--color-wine);
+    color: var(--color-white);
+    font-size: 12px;
+    text-decoration: none;
+    transition: gap 0.25s ease;
+
+    &:hover {
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    padding: 55px 28px 75px;
+
+    &__story {
+      gap: 55px;
+      padding: 110px 2% 90px;
+    }
+
+    &__closing {
+      padding: 100px 2% 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 42px 18px 65px;
+
+    &__header {
+      padding-bottom: 45px;
+
+      h1 {
+        font-size: clamp(52px, 13vw, 76px);
+        letter-spacing: -2px;
+      }
+    }
+
+    &__intro {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      margin-left: 0;
+
+      p {
+        font-size: 17px;
+      }
+
+      span {
+        text-align: left;
+      }
+    }
+
+    &__gallery {
+      grid-auto-rows: 42px;
+      gap: 8px;
+    }
+
+    &__photo {
+      &--main {
+        grid-column: 1 / 9;
+        grid-row: span 6;
+      }
+
+      &--small {
+        grid-column: 9 / 13;
+        grid-row: span 4;
+      }
+
+      &--tall {
+        grid-column: 9 / 13;
+        grid-row: span 4;
+      }
+
+      &--wide {
+        grid-column: 1 / 7;
+        grid-row: span 4;
+      }
+
+      &--medium {
+        grid-column: 7 / 13;
+        grid-row: span 4;
+      }
+
+      &--portrait {
+        grid-column: 1 / 5;
+        grid-row: span 5;
+      }
+
+      &--detail {
+        grid-column: 5 / 9;
+        grid-row: span 5;
+      }
+
+      &--last {
+        grid-column: 9 / 13;
+        grid-row: span 5;
+      }
+    }
+
+    &__story {
+      grid-template-columns: 1fr;
+      gap: 35px;
+      padding: 85px 2% 75px;
+    }
+
+    &__story-heading h2 {
+      max-width: 300px;
+      font-size: 42px;
+    }
+
+    &__story-content p {
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    &__quote {
+      padding: 65px 5%;
+
+      p {
+        font-size: 36px;
+      }
+    }
+
+    &__closing {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 80px 2% 10px;
+
+      h2 {
+        font-size: 44px;
+      }
+    }
+  }
+}

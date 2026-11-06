@@ -1,6 +1,6 @@
 
 import { motion } from 'motion/react';
-import {ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import './Sidebar.scss';
 
 interface SidebarProps {
@@ -10,11 +10,9 @@ interface SidebarProps {
 
 const categorias = [
     'Todos os trabalhos',
-    'Retratos',
-    'Ensaios',
     'Eventos',
-    'Editorial',
     'Pessoal',
+    'Contato'
 ];
 
 export function Sidebar({
@@ -36,9 +34,9 @@ export function Sidebar({
                 </motion.div>
 
                 <nav className="sidebar__navigation">
-          <span className="sidebar__label">
-            EXPLORAR
-          </span>
+                    <span className="sidebar__label">
+                        EXPLORAR
+                    </span>
 
                     <ul>
                         {categorias.map((categoria, index) => {
@@ -52,6 +50,7 @@ export function Sidebar({
                                     transition={{ delay: 0.15 + index * 0.06 }}
                                 >
                                     <button
+                                        type="button"
                                         className={`sidebar__link ${
                                             ativa ? 'sidebar__link--active' : ''
                                         }`}
@@ -77,20 +76,6 @@ export function Sidebar({
                     </ul>
                 </nav>
 
-                <nav className="sidebar__navigation sidebar__information">
-          <span className="sidebar__label">
-            CONHEÇA
-          </span>
-
-                    <a href="#sobre" className="sidebar__link">
-                        Sobre mim
-                    </a>
-
-                    <a href="#contato" className="sidebar__link">
-                        Entre em contato
-                    </a>
-                </nav>
-
             </div>
 
             <div className="sidebar__footer">
@@ -105,10 +90,10 @@ export function Sidebar({
                 </a>
 
                 <span className="sidebar__copyright">
-          © 2026 LOUIZI
-          <br />
-          TODOS OS DIREITOS RESERVADOS
-        </span>
+                    © 2026 LOUIZI
+                    <br />
+                    TODOS OS DIREITOS RESERVADOS
+                </span>
             </div>
         </aside>
     );
