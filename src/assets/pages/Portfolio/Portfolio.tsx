@@ -58,6 +58,14 @@ const eventos: Evento[] = [
         fotos: carregarFotos('exposol'),
     },
     {
+        id: 'sulemotos',
+        titulo: 'SUL E MOTOS - SOLEDADE',
+        descricao: 'Evento de Motos do Grupo Bicho Véio - Soledade.',
+        pasta: 'sulemotos',
+        quantidade: 20,
+        fotos: carregarFotos('sulemotos'),
+    },
+    {
         id: 'tsara',
         titulo: 'VARIETÉ DA TSARA',
         descricao: 'Arte, cultura e expressão.',

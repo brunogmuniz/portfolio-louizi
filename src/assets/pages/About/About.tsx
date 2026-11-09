@@ -1,3 +1,4 @@
+
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import './About.scss';
@@ -6,20 +7,46 @@ import foto1 from '../../images/about/1.jpeg';
 import foto2 from '../../images/about/2.jpeg';
 import foto3 from '../../images/about/3.jpeg';
 import foto4 from '../../images/about/4.jpeg';
-import foto5 from '../../images/about/5.jpeg';
 import foto6 from '../../images/about/6.jpeg';
 import foto7 from '../../images/about/7.jpeg';
 import foto8 from '../../images/about/8.jpeg';
 
 const fotos = [
-    { src: foto1, alt: 'Retrato pessoal de Louizi', className: 'about__photo--main' },
-    { src: foto2, alt: 'Registro pessoal de Louizi', className: 'about__photo--small about__photo--face'},
-    { src: foto3, alt: 'Experiência artística e expressão', className: 'about__photo--tall' },
-    { src: foto4, alt: 'Momento da trajetória de Louizi', className: 'about__photo--wide' },
-    { src: foto5, alt: 'Registro de fotografia e arte', className: 'about__photo--medium' },
-    { src: foto6, alt: 'Expressão corporal e movimento', className: 'about__photo--portrait' },
-    { src: foto7, alt: 'Vivência artística de Louizi', className: 'about__photo--detail' },
-    { src: foto8, alt: 'Retrato de encerramento', className: 'about__photo--last' },
+    {
+        src: foto1,
+        alt: 'Retrato pessoal de Louizi',
+        className: 'about__photo--main',
+    },
+    {
+        src: foto2,
+        alt: 'Registro pessoal de Louizi',
+        className: 'about__photo--small about__photo--face',
+    },
+    {
+        src: foto3,
+        alt: 'Experiência artística e expressão',
+        className: 'about__photo--tall',
+    },
+    {
+        src: foto4,
+        alt: 'Momento da trajetória de Louizi',
+        className: 'about__photo--wide',
+    },
+    {
+        src: foto6,
+        alt: 'Expressão corporal e movimento',
+        className: 'about__photo--portrait',
+    },
+    {
+        src: foto7,
+        alt: 'Vivência artística de Louizi',
+        className: 'about__photo--detail',
+    },
+    {
+        src: foto8,
+        alt: 'Retrato de encerramento',
+        className: 'about__photo--last',
+    },
 ];
 
 export function About() {
@@ -56,10 +83,19 @@ export function About() {
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.15 }}
-                        transition={{ duration: 0.65, delay: (index % 2) * 0.08 }}
+                        transition={{
+                            duration: 0.65,
+                            delay: (index % 2) * 0.08,
+                        }}
                     >
-                        <img src={foto.src} alt={foto.alt} loading={index < 2 ? 'eager' : 'lazy'} />
-                        <figcaption>0{index + 1} / 08</figcaption>
+                        <img
+                            src={foto.src}
+                            alt={foto.alt}
+                            loading={index < 2 ? 'eager' : 'lazy'}
+                        />
+                        <figcaption>
+                            {String(index + 1).padStart(2, '0')} / 07
+                        </figcaption>
                     </motion.figure>
                 ))}
             </section>

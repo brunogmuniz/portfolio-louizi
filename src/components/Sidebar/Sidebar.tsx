@@ -9,8 +9,8 @@ interface SidebarProps {
 }
 
 const categorias = [
+    'Pagina Inicial',
     'Todos os trabalhos',
-    'Eventos',
     'Pessoal',
     'Contato'
 ];
