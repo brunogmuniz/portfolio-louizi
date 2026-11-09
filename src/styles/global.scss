@@ -29,7 +29,7 @@ html {
 body {
   background-color: var(--color-black);
   color: var(--color-white);
-  font-family: Arial, sans-serif;
+  font-family: 'DM Sans', Arial, sans-serif;
   overflow-x: hidden;
 }
 
@@ -40,6 +40,13 @@ a {
 
 button {
   cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-wine-soft);
+  outline-offset: 3px;
 }
 
 .app {
@@ -66,5 +73,38 @@ button {
       margin-left: 0;
       min-height: auto;
     }
+  }
+}
+
+// Alternativa intencional: remove deslocamento e scroll suave,
+// preservando feedback de cor/filtro e a mudança de estado.
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .home__hero-image img,
+  .home__highlight img,
+  .about__photo img,
+  .portfolio__photo img,
+  .contact__option,
+  .home__explore,
+  .about__contact {
+    transition-property: color, background-color, border-color, filter, opacity;
+    transition-duration: 0.2s;
+  }
+
+  .home__hero-image:hover img,
+  .home__highlight:hover img,
+  .about__photo:hover img,
+  .portfolio__photo:hover img,
+  .contact__option:hover,
+  .home__explore:hover,
+  .about__contact:hover {
+    transform: none;
+  }
+
+  .home__explore:hover {
+    gap: 35px;
   }
 }

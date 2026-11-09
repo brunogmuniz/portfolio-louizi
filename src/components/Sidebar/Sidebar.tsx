@@ -1,5 +1,5 @@
 
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import './Sidebar.scss';
 
@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 const categorias = [
-    'Pagina Inicial',
+    'Página Inicial',
     'Todos os trabalhos',
     'Pessoal',
     'Contato'
@@ -19,21 +19,25 @@ export function Sidebar({
                             categoriaAtiva,
                             onCategoriaChange,
                         }: SidebarProps) {
+    const reduceMotion = useReducedMotion();
+
     return (
         <aside className="sidebar">
             <div className="sidebar__top">
 
                 <motion.div
                     className="sidebar__brand"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                    animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={reduceMotion ? undefined : { duration: 0.8 }}
                 >
-                    <h1>Louizi<span>.</span></h1>
+                    <div className="sidebar__brand-title">
+                        Louizi<span>.</span>
+                    </div>
                     <p>FOTOGRAFIA & ARTE VISUAL</p>
                 </motion.div>
 
-                <nav className="sidebar__navigation">
+                <nav className="sidebar__navigation" aria-label="Navegação principal">
                     <span className="sidebar__label">
                         EXPLORAR
                     </span>
@@ -45,9 +49,13 @@ export function Sidebar({
                             return (
                                 <motion.li
                                     key={categoria}
-                                    initial={{ opacity: 0, x: -8 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.15 + index * 0.06 }}
+                                    initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+                                    animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+                                    transition={
+                                        reduceMotion
+                                            ? undefined
+                                            : { delay: 0.15 + index * 0.06 }
+                                    }
                                 >
                                     <button
                                         type="button"
@@ -55,6 +63,7 @@ export function Sidebar({
                                             ativa ? 'sidebar__link--active' : ''
                                         }`}
                                         onClick={() => onCategoriaChange(categoria)}
+                                        aria-current={ativa ? 'page' : undefined}
                                     >
                                         {categoria}
 
@@ -62,11 +71,15 @@ export function Sidebar({
                                             <motion.span
                                                 layoutId="active-underline"
                                                 className="sidebar__underline"
-                                                transition={{
-                                                    type: 'spring',
-                                                    stiffness: 350,
-                                                    damping: 30,
-                                                }}
+                                                transition={
+                                                    reduceMotion
+                                                        ? { duration: 0 }
+                                                        : {
+                                                            type: 'spring',
+                                                            stiffness: 350,
+                                                            damping: 30,
+                                                        }
+                                                }
                                             />
                                         )}
                                     </button>
@@ -80,10 +93,11 @@ export function Sidebar({
 
             <div className="sidebar__footer">
                 <a
-                    href="https://instagram.com/"
+                    href="https://instagram.com/tmwthv"
                     target="_blank"
                     rel="noreferrer"
                     className="sidebar__instagram"
+                    aria-label="Instagram de Louizi (@tmwthv)"
                 >
                     <span>INSTAGRAM</span>
                     <ArrowUpRight size={13} />

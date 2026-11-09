@@ -1,6 +1,7 @@
 
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { FaInstagram } from 'react-icons/fa';
+import { imageDimensions } from '../../../data/imageDimensions';
 import './Home.scss';
 
 interface HomeProps {
@@ -26,17 +27,33 @@ const imagensPortfolio = import.meta.glob<string>(
     }
 );
 
+interface ImagemEncontrada {
+    src: string;
+    width: number;
+    height: number;
+}
+
 function encontrarImagem(
     imagens: Record<string, string>,
     pasta: string,
     arquivo: string
-) {
+): ImagemEncontrada {
     const caminho = Object.keys(imagens).find((caminho) =>
         caminho.includes(`/${pasta}/`) &&
         caminho.endsWith(`/${arquivo}`)
     );
 
-    return caminho ? imagens[caminho] : '';
+    if (!caminho) {
+        return { src: '', width: 0, height: 0 };
+    }
+
+    const dimensoes = imageDimensions[caminho.replace('../../images/', '')];
+
+    return {
+        src: imagens[caminho],
+        width: dimensoes?.width ?? 0,
+        height: dimensoes?.height ?? 0,
+    };
 }
 
 const imagemHero = encontrarImagem(imagensPortfolio, 'upf', '3.jpeg');
@@ -66,7 +83,7 @@ export default function Home({ onExplore, onAbout }: HomeProps) {
     return (
         <div className="home">
             <header className="home__header">
-                <a href="/" className="home__logo">
+                <a href="#/" className="home__logo">
                     Louizi<span>.</span>
                 </a>
 
@@ -112,10 +129,12 @@ export default function Home({ onExplore, onAbout }: HomeProps) {
                 </div>
 
                 <div className="home__hero-image">
-                    {imagemHero && (
+                    {imagemHero.src && (
                         <img
-                            src={imagemHero}
+                            src={imagemHero.src}
                             alt="Fotografia de evento"
+                            width={imagemHero.width || undefined}
+                            height={imagemHero.height || undefined}
                         />
                     )}
 
@@ -177,10 +196,12 @@ export default function Home({ onExplore, onAbout }: HomeProps) {
                                     : onExplore
                             }
                         >
-                            {foto.imagem ? (
+                            {foto.imagem.src ? (
                                 <img
-                                    src={foto.imagem}
+                                    src={foto.imagem.src}
                                     alt={foto.titulo}
+                                    width={foto.imagem.width || undefined}
+                                    height={foto.imagem.height || undefined}
                                 />
                             ) : (
                                 <div className="home__image-placeholder">

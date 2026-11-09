@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-
 .home {
   min-height: 100vh;
   width: 100%;
-  background: #151515;
-  color: #F5F1EB;
+  background: var(--color-black);
+  color: var(--color-white);
   font-family: 'DM Sans', sans-serif;
 
   &__header {
@@ -13,17 +11,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(21, 21, 21, 0.12);
+    border-bottom: 1px solid rgba(245, 241, 235, 0.12);
   }
 
   &__logo {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
-    color: #151515;
+    color: var(--color-white);
     text-decoration: none;
 
     span {
-      color: #842536;
+      color: var(--color-wine-soft);
     }
   }
 
@@ -33,22 +31,22 @@
   &__image-caption,
   &__scroll,
   &__footer {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
     font-weight: 600;
   }
 
   &__header-label {
-    color: #88817a;
+    color: var(--color-text-muted);
   }
 
   &__instagram {
-    color: #151515;
+    color: var(--color-white);
     display: flex;
     transition: color 0.3s;
 
     &:hover {
-      color: #842536;
+      color: var(--color-wine-soft);
     }
   }
 
@@ -68,7 +66,7 @@
   }
 
   &__eyebrow {
-    color: #842536;
+    color: var(--color-wine-soft);
     display: block;
     margin-bottom: 28px;
   }
@@ -82,13 +80,13 @@
     margin: 0;
 
     span {
-      color: #842536;
+      color: var(--color-wine-soft);
       font-style: italic;
     }
   }
 
   &__description {
-    color: #77716b;
+    color: var(--color-text-muted);
     font-size: 14px;
     line-height: 1.9;
     max-width: 340px;
@@ -100,9 +98,9 @@
     align-items: center;
     gap: 35px;
     padding: 17px 22px;
-    border: 1px solid #842536;
-    background: #842536;
-    color: #fff;
+    border: 1px solid var(--color-wine);
+    background: var(--color-wine);
+    color: var(--color-white);
     font-family: inherit;
     font-size: 12px;
     cursor: pointer;
@@ -110,7 +108,7 @@
 
     &:hover {
       background: transparent;
-      color: #842536;
+      color: var(--color-wine-soft);
       gap: 45px;
     }
   }
@@ -140,7 +138,7 @@
     bottom: 18px;
     left: 18px;
     color: #fff;
-    font-size: 9px;
+    font-size: 11px;
     text-shadow: 0 1px 8px #000;
   }
 
@@ -149,7 +147,7 @@
     right: 3%;
     top: 50%;
     writing-mode: vertical-rl;
-    color: #aaa19a;
+    color: var(--color-text-muted);
   }
 
   &__scroll {
@@ -159,17 +157,17 @@
     display: flex;
     align-items: center;
     gap: 13px;
-    color: #88817a;
+    color: var(--color-text-muted);
   }
 
   &__intro {
     padding: 115px 12%;
-    background: #151515;
-    color: #f5f1eb;
+    background: var(--color-black);
+    color: var(--color-white);
     text-align: center;
 
     .home__eyebrow {
-      color: #b77a83;
+      color: var(--color-wine-soft);
     }
 
     h2 {
@@ -181,7 +179,7 @@
       line-height: 1.2;
 
       span {
-        color: #b77a83;
+        color: var(--color-wine-soft);
         font-style: italic;
       }
     }
@@ -189,7 +187,7 @@
     p {
       max-width: 480px;
       margin: 25px auto 0;
-      color: #aaa19a;
+      color: var(--color-text-muted);
       font-size: 13px;
       line-height: 1.9;
     }
@@ -219,7 +217,7 @@
       gap: 10px;
       border: 0;
       background: none;
-      color: #842536;
+      color: var(--color-wine-soft);
       font-family: inherit;
       font-size: 12px;
       cursor: pointer;
@@ -236,7 +234,7 @@
     padding: 0;
     border: 0;
     background: transparent;
-    color: #151515;
+    color: var(--color-white);
     text-align: left;
     cursor: pointer;
 
@@ -262,8 +260,8 @@
 
     span {
       grid-column: 1 / -1;
-      color: #918981;
-      font-size: 9px;
+      color: var(--color-text-muted);
+      font-size: 11px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
@@ -276,25 +274,25 @@
     }
 
     svg {
-      color: #842536;
+      color: var(--color-wine-soft);
     }
   }
 
   &__footer {
     min-height: 80px;
     padding: 20px 6%;
-    border-top: 1px solid rgba(21, 21, 21, 0.12);
+    border-top: 1px solid rgba(245, 241, 235, 0.12);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #88817a;
-    font-size: 9px;
+    color: var(--color-text-muted);
+    font-size: 11px;
 
     a {
       display: flex;
       align-items: center;
       gap: 5px;
-      color: #842536;
+      color: var(--color-wine-soft);
       text-decoration: none;
     }
   }
@@ -329,7 +327,7 @@
     }
 
     &__header-label {
-      font-size: 8px;
+      font-size: 11px;
     }
 
     &__hero {

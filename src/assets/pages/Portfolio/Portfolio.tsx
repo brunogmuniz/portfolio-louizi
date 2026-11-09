@@ -1,11 +1,14 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
+import { imageDimensions } from '../../../data/imageDimensions';
 import './Portfolio.scss';
 
 interface Foto {
     src: string;
     nome: string;
+    width: number;
+    height: number;
 }
 
 interface Evento {
@@ -34,10 +37,16 @@ function carregarFotos(pasta: string): Foto[] {
             const numeroB = Number(b.split('/').pop()?.match(/^\d+/)?.[0] ?? 0);
             return numeroA - numeroB;
         })
-        .map(([caminho, src]) => ({
-            src,
-            nome: caminho.split('/').pop() ?? 'Fotografia',
-        }));
+        .map(([caminho, src]) => {
+            const dimensoes = imageDimensions[caminho.replace('../../images/', '')];
+
+            return {
+                src,
+                nome: caminho.split('/').pop() ?? 'Fotografia',
+                width: dimensoes?.width ?? 0,
+                height: dimensoes?.height ?? 0,
+            };
+        });
 }
 
 const eventos: Evento[] = [
@@ -81,6 +90,11 @@ interface PortfolioProps {
 
 function Portfolio({ categoria }: PortfolioProps) {
     const [fotoAtiva, setFotoAtiva] = useState<number | null>(null);
+    const lightboxRef = useRef<HTMLDivElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const previouslyFocused = useRef<HTMLElement | null>(null);
+
+    const lightboxAberto = fotoAtiva !== null;
 
     const eventosExibidos =
         categoria === 'Todos os trabalhos' || categoria === 'Eventos'
@@ -109,12 +123,49 @@ function Portfolio({ categoria }: PortfolioProps) {
             if (event.key === 'Escape') setFotoAtiva(null);
             if (event.key === 'ArrowRight') navegarFoto(1);
             if (event.key === 'ArrowLeft') navegarFoto(-1);
+
+            if (event.key === 'Tab' && lightboxRef.current) {
+                const focusable = Array.from(
+                    lightboxRef.current.querySelectorAll<HTMLElement>(
+                        'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    )
+                );
+
+                if (focusable.length === 0) return;
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
         };
 
         window.addEventListener('keydown', handleKeyDown);
 
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [fotoAtiva, todasFotos.length]);
+
+    useEffect(() => {
+        if (!lightboxAberto) return;
+
+        previouslyFocused.current = document.activeElement as HTMLElement | null;
+
+        const overflowOriginal = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        closeButtonRef.current?.focus();
+
+        return () => {
+            document.body.style.overflow = overflowOriginal;
+            previouslyFocused.current?.focus();
+        };
+    }, [lightboxAberto]);
 
     return (
         <section className="portfolio">
@@ -181,6 +232,8 @@ function Portfolio({ categoria }: PortfolioProps) {
                                                 <img
                                                     src={foto.src}
                                                     alt={`${evento.titulo} - ${foto.nome}`}
+                                                    width={foto.width || undefined}
+                                                    height={foto.height || undefined}
                                                     loading="lazy"
                                                 />
                                             </button>
@@ -203,6 +256,7 @@ function Portfolio({ categoria }: PortfolioProps) {
 
             {fotoAtiva !== null && todasFotos[fotoAtiva] && (
                 <div
+                    ref={lightboxRef}
                     className="portfolio__lightbox"
                     onClick={() => setFotoAtiva(null)}
                     role="dialog"
@@ -210,6 +264,7 @@ function Portfolio({ categoria }: PortfolioProps) {
                     aria-label="Visualização de fotografia"
                 >
                     <button
+                        ref={closeButtonRef}
                         className="portfolio__lightbox-close"
                         onClick={() => setFotoAtiva(null)}
                         aria-label="Fechar"

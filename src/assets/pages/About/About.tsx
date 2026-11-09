@@ -1,6 +1,7 @@
 
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
+import { imageDimensions } from '../../../data/imageDimensions';
 import './About.scss';
 
 import foto1 from '../../images/about/1.jpeg';
@@ -11,52 +12,68 @@ import foto6 from '../../images/about/6.jpeg';
 import foto7 from '../../images/about/7.jpeg';
 import foto8 from '../../images/about/8.jpeg';
 
+const dimensoes = (chave: string) =>
+    imageDimensions[chave] ?? { width: 0, height: 0 };
+
 const fotos = [
     {
         src: foto1,
+        ...dimensoes('about/1.jpeg'),
         alt: 'Retrato pessoal de Louizi',
         className: 'about__photo--main',
     },
     {
         src: foto2,
+        ...dimensoes('about/2.jpeg'),
         alt: 'Registro pessoal de Louizi',
         className: 'about__photo--small about__photo--face',
     },
     {
         src: foto3,
+        ...dimensoes('about/3.jpeg'),
         alt: 'Experiência artística e expressão',
         className: 'about__photo--tall',
     },
     {
         src: foto4,
+        ...dimensoes('about/4.jpeg'),
         alt: 'Momento da trajetória de Louizi',
         className: 'about__photo--wide',
     },
     {
         src: foto6,
+        ...dimensoes('about/6.jpeg'),
         alt: 'Expressão corporal e movimento',
         className: 'about__photo--portrait',
     },
     {
         src: foto7,
+        ...dimensoes('about/7.jpeg'),
         alt: 'Vivência artística de Louizi',
         className: 'about__photo--detail',
     },
     {
         src: foto8,
+        ...dimensoes('about/8.jpeg'),
         alt: 'Retrato de encerramento',
         className: 'about__photo--last',
     },
 ];
 
-export function About() {
+interface AboutProps {
+    onContact: () => void;
+}
+
+export function About({ onContact }: AboutProps) {
+    const reduceMotion = useReducedMotion();
+
     return (
-        <main className="about">
+        <section className="about">
             <motion.header
                 className="about__header"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                transition={reduceMotion ? undefined : { duration: 0.7 }}
             >
                 <span className="about__eyebrow">UM POUCO SOBRE MIM</span>
 
@@ -80,17 +97,23 @@ export function About() {
                     <motion.figure
                         key={foto.src}
                         className={`about__photo ${foto.className}`}
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.15 }}
-                        transition={{
-                            duration: 0.65,
-                            delay: (index % 2) * 0.08,
-                        }}
+                        transition={
+                            reduceMotion
+                                ? undefined
+                                : {
+                                    duration: 0.65,
+                                    delay: (index % 2) * 0.08,
+                                }
+                        }
                     >
                         <img
                             src={foto.src}
                             alt={foto.alt}
+                            width={foto.width || undefined}
+                            height={foto.height || undefined}
                             loading={index < 2 ? 'eager' : 'lazy'}
                         />
                         <figcaption>
@@ -171,11 +194,15 @@ export function About() {
                     movimento e imagem.
                 </p>
 
-                <a href="#contato" className="about__contact">
+                <button
+                    type="button"
+                    className="about__contact"
+                    onClick={onContact}
+                >
                     Vamos conversar <ArrowUpRight size={17} strokeWidth={1.5} />
-                </a>
+                </button>
             </section>
-        </main>
+        </section>
     );
 }
 
